@@ -8,15 +8,13 @@ RUN set -ex && \
     apk upgrade && \
     apk add --no-cache lighttpd mc
 
-COPY entrypoint.sh /usr/bin/entrypoint.sh
-
 RUN  rm -R /etc/lighttpd
 
 COPY rootfs/ /etc/lighttpd/
+COPY index.html /var/www/index.html
+COPY entrypoint.sh /usr/bin/entrypoint.sh
 
 WORKDIR /var/www
-
-VOLUME ["/var/www"]
 
 EXPOSE 80
 
