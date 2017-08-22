@@ -1,12 +1,13 @@
 FROM alpine:3.4
 
-ENV UID     100
-ENV GID     101
-
 RUN set -ex && \
     apk update && \
     apk upgrade && \
     apk add --no-cache lighttpd mc
+
+# 82 is the standard uid/gid for "www-data" in Alpine
+
+RUN set -x && adduser -u 82 -D -S -G www-data www-data
 
 RUN  rm -R /etc/lighttpd
 
