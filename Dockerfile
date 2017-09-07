@@ -1,14 +1,15 @@
 FROM resin/amd64-alpine
 
-RUN apk add --update --no-cache lighttpd
+RUN set -ex && \
+    apk add --update --no-cache lighttpd mc
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 
 RUN set -x && adduser -u 82 -D -S -G www-data www-data
 
-RUN  rm -R /etc/lighttpd
+RUN  rm -R /app
 
-COPY rootfs/ /etc/lighttpd/
+COPY rootfs/ /app/
 COPY index.html /var/www/index.html
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 
@@ -18,4 +19,4 @@ EXPOSE 80
 
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 
-CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
+CMD ["lighttpd", "-D", "-f", "/app/lighttpd.conf"]
