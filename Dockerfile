@@ -7,8 +7,6 @@ RUN set -ex && \
 
 RUN set -x && adduser -u 82 -D -S -G www-data www-data
 
-RUN  rm -R /app
-
 COPY rootfs/ /app/
 COPY index.html /var/www/index.html
 COPY entrypoint.sh /usr/bin/entrypoint.sh
