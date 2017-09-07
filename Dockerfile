@@ -1,9 +1,6 @@
 FROM resin/amd64-alpine
 
-RUN set -ex && \
-    apk update && \
-    apk upgrade && \
-    apk add --no-cache lighttpd mc
+RUN apk add --update --no-cache lighttpd
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 
