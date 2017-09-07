@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM resin/amd64-alpine
 
 RUN set -ex && \
     apk update && \
