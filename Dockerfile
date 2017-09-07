@@ -3,7 +3,10 @@ FROM alpine:3.4
 RUN set -ex && \
     apk update && \
     apk upgrade && \
-    apk add --no-cache lighttpd mc
+    apk add --no-cache lighttpd php-cgi
+
+RUN lighty-enable-mod fastcgi
+RUN lighty-enable-mod fastcgi-php
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 
